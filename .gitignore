@@ -4,6 +4,8 @@
 .vs
 .idea
 .idea/*
+appsettings.Development.json
+
 
 # User-specific files
 *.suo
