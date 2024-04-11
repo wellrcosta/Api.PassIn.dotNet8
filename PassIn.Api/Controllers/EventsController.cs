@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using PassIn.Application.UseCases.Events.GetById;
 using PassIn.Application.UseCases.Events.Register;
 using PassIn.Communication.Requests;
 using PassIn.Communication.Responses;
 using PassIn.Exceptions;
+using PassIn.Infrastructure.Validators;
 
 namespace PassIn.Api.Controllers
 {
@@ -17,6 +19,14 @@ namespace PassIn.Api.Controllers
         [ProducesResponseType(typeof (ResponseErrorJson), StatusCodes.Status400BadRequest)]
         public IActionResult Register([FromBody] RequestEventJson request)
         {
+            var validator = new RequestEventJsonValidator();
+            var validationResult = validator.Validate(request);
+            if (!validationResult.IsValid)
+            {
+                var errorMessages = validationResult.Errors.FirstOrDefault()?.ErrorMessage ?? "An error occurred";
+
+                return BadRequest(new ResponseErrorJson(errorMessages));
+}
             try
             {
                 var useCase = new RegisterEventUseCase();

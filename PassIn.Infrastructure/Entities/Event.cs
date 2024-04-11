@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace PassIn.Infrastructure.Entities;
 
 public class Event

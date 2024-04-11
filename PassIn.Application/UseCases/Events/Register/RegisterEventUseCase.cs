@@ -10,8 +10,6 @@ public class RegisterEventUseCase
 {
     public ResponseRegisteredEventsJson Execute(RequestEventJson request)
     {
-        Validate(request);
-
         var dbContext = new PassInDbContext();
         var entity = new Event
         {
@@ -28,22 +26,5 @@ public class RegisterEventUseCase
         {
             Id = entity.Id
         };
-    }
-
-    private static void Validate(RequestEventJson request)
-    {
-        if (request.MaximumAttendees <= 0)
-        {
-            throw new PassInException("Maximum attendees must be greater than 0");
-        }
-
-        if (string.IsNullOrWhiteSpace(request.Title))
-        {
-            throw new PassInException("Title cannot be empty");
-        }
-        if(string.IsNullOrWhiteSpace(request.Details))
-        {
-            throw new PassInException("Details cannot be empty");
-        }
     }
 }

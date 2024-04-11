@@ -1,4 +1,6 @@
-﻿namespace PassIn.Communication.Requests;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace PassIn.Communication.Requests;
 public class RequestEventJson
 {
     public string Title { get; set; } = string.Empty;

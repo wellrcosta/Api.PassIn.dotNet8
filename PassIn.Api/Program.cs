@@ -1,9 +1,15 @@
+using FluentValidation;
+using PassIn.Communication.Requests;
+using PassIn.Infrastructure.Validators;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<IValidator<RequestEventJson>, RequestEventJsonValidator>();
 
 var app = builder.Build();
 
