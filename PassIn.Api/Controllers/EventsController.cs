@@ -26,7 +26,7 @@ namespace PassIn.Api.Controllers
                 var errorMessages = validationResult.Errors.FirstOrDefault()?.ErrorMessage ?? "An error occurred";
 
                 return BadRequest(new ResponseErrorJson(errorMessages));
-}
+            }
             try
             {
                 var useCase = new RegisterEventUseCase();
